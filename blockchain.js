@@ -41,6 +41,10 @@ class Blockchain {
             // CHECK IF THE HASH IS CORRECT.
             const validatedHash = cryptoHash(timestamp, lastHash, nonce, difficulty, data);
             if (hash !== validatedHash) return false;
+
+            // CHECK FOR ILLEGAL DIFFICULTY JUMPS.
+            const lastDifficulty = chain[i-1].difficulty;
+            if (Math.abs(lastDifficulty - difficulty) > 1) return false;
         }
 
         return true;

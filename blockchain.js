@@ -15,6 +15,17 @@ class Blockchain {
         this.chain.push(newBlock);
     }
 
+    replaceChain(chain) {
+
+        // CHECK IF INCOMING CHAIN IS LONGER.
+        if (chain.length <= this.chain.length) return;
+
+        // CHECK IF INCOMING CHAIN IS VALID.
+        if (!Blockchain.isValidChain(chain)) return;
+
+        this.chain = chain;
+    }
+
     static isValidChain(chain) {
 
         // CHECK IF GENESIS BLOCK IS CORRECT.

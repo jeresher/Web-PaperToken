@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('request');
-const Blockchain = require('./services/blockchain');
+const Blockchain = require('./blockchain/blockchain');
 const PubSub = require('./network/pubsub');
 const { PORT, ROOT_NODE_ADDRESS, DEFAULT_PORT } = require('./config/port');
 const app = express();

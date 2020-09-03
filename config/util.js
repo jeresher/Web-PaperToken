@@ -13,7 +13,15 @@ const cryptoHash = (...inputs) => {
 // USED TO GENERATE ELLIPTICAL BASED KEY PAIRS.
 const ec = new EC('secp256k1');
 
+
+const verifySignature = ({ publicKey, data, signature }) => {
+    const keyFromPublic = ec.keyFromPublic(publicKey, 'hex');
+
+    return keyFromPublic.verify(cryptoHash(data), signature);
+};
+
 module.exports = { 
     cryptoHash,
-    ec 
+    ec,
+    verifySignature
 };

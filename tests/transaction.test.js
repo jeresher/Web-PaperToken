@@ -79,4 +79,35 @@ describe('Transaction', () => {
         })
 
     })
+
+    // The update function is going to have the ability to add a new amount for a new recipient in an existing transactions OutputMap.
+    describe('update()', () => {
+        let originalSignature, originalSenderOutput, nextRecipient, nextAmount;
+
+        beforeEach(() => {
+            originalSignature = transaction.input.signature;
+            originalSenderOutput = transaction.outputMap[senderWallet.publicKey];
+            nextRecipient = 'next-recipient';
+            nextAmount = 20;
+
+            transaction.update({ senderWallet, recipient: nextRecipient, amount: nextAmount})
+        });
+
+        it('outputs the amount to the next recipient', () => {
+            expect(transaction.outputMap[nextRecipient]).toEqual(nextAmount)
+        });
+        it('subtracts the amount from the original `senderWallet` balance', () => {
+            expect(transaction.outputMap[senderWallet.publicKey])
+            .toEqual(originalSenderOutput - nextAmount);
+        });
+        it('maintains a total output that matches the input amount', () => {
+            expect(
+                Object.values(trasaction.outputMap)
+                .reduce((total, outputAmount) => total + outputAmount)
+            ).toEqual(transaction.input.amount);
+        })
+        it('re-signs the transaction', () => {
+            expect(transaction.input.signature).not.toEqual(originalSignature);
+        })
+    })
 });

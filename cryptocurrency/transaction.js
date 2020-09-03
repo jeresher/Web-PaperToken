@@ -18,7 +18,8 @@ class Transaction {
     }
 
     // The transaction input gives official details about the transaction.
-    // ... It is also used by users to validate if the transaction is valid.
+    // ... This is how senders sign a transaction 
+    // ... and what users use to validate the transaction.
     createInput({ senderWallet, outputMap }) {
         return {
             timestamp: Date.now(),

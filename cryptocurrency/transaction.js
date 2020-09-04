@@ -32,6 +32,29 @@ class Transaction {
         };
     }
 
+    // This update function is used to add a new recipient and amount to the existing transaction.
+    update({ senderWallet, recipient, amount }) {
+
+        // Check if the amount exceeds sender balance.
+        if (amount > this.outputMap[senderWallet.publicKey]) {
+            throw new Error('Amount exceeds balance');
+        }
+
+        // Add a new amount and recipient to the existing transaction.
+        // ... Checks if the recipient already exists in the transaction (prevent override).
+        if (!(recipient in this.outputMap)) {
+            this.outputMap[recipient] = amount;
+        } else {
+            this.outputMap[recipient] = this.outputMap[recipient] + amount;
+        }
+        
+        // Subtract new amount from `senderWallet.publicKey`.
+        this.outputMap[senderWallet.publicKey] = this.outputMap[senderWallet.publicKey] - amount;
+
+        // Generate a new signature (input) for the updated transaction.
+        this.input = this.createInput({ senderWallet, outputMap: this.outputMap})
+    }
+
     static validTransaction(transaction) {
         const { input: { address, amount, signature}, outputMap } = transaction;
 

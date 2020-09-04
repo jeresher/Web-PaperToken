@@ -20,8 +20,8 @@ class Transaction {
         return outputMap;
     }
 
-    // The transaction input gives official details about the transaction.
-    // ... This is how senders sign a transaction 
+    // The transaction input is the official overview of the transaction.
+    // ... `createInput` is how senders sign a transaction 
     // ... and what users use to validate the transaction.
     createInput({ senderWallet, outputMap }) {
         return {

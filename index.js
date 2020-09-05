@@ -2,20 +2,24 @@ const express = require('express');
 const request = require('request');
 const Blockchain = require('./blockchain/blockchain');
 const PubSub = require('./network/pubsub');
+const TransactionPool = require('./cryptocurrency/transactionpool')
+const Wallet = require('./cryptocurrency/wallet')
 const { PORT, ROOT_NODE_ADDRESS, DEFAULT_PORT } = require('./config/port');
-const app = express();
 
+const app = express();
 const blockchain = new Blockchain();
+const transactionPool = new TransactionPool;
+const wallet = new Wallet();
 const pubsub = new PubSub( { blockchain });
 
 app.use(express.json());
 
-// GET REQUEST TO RETRIEVE THE CHAIN.
+// BLOCKCHAIN: GET REQUEST TO RETRIEVE THE CHAIN.
 app.get('/api/blocks', (req, res) => {
     res.send(blockchain.chain);
 })
 
-// POST REQUEST TO MINE A BLOCK.
+// BLOCKCHAIN: POST REQUEST TO MINE A BLOCK.
 app.post('/api/mine', (req, res) => {
     const { data } = req.body;
 
@@ -26,7 +30,33 @@ app.post('/api/mine', (req, res) => {
     res.redirect('/api/blocks');
 })
 
-// SYNC BLOCKCHAIN INSTANCE TO CURRENT BLOCKCHAIN ON CONNECT.
+// CRYPTOCURRENCY: POST REQUEST TO SEND CURRENCY.
+app.post('/api/transact', (req, res) => {
+    const { amount, recipient } = req.body;
+
+    // ...Check if this wallet already has an existing transaction in the transaction pool.
+    let transaction = transactionPool.existingTransaction(wallet); 
+
+    // ...Create or update a transaction.
+    try {
+        if (transaction) {
+            transaction.update({ senderWallet: wallet, recipient, amount });
+        } else {
+            transaction = wallet.createTransaction({ recipient, amount });
+        }
+    } catch(error) {
+        return res.status(400).json({ type: 'error', message: error.message })
+    }
+
+    // ...Add it to the transaction pool.
+    transactionPool.setTransaction(transaction);
+    
+    console.log('transactionPool', transactionPool);
+
+    res.json({ type: 'success', transaction });
+})
+
+// BLOCKCHAIN: SYNC BLOCKCHAIN INSTANCE TO CURRENT BLOCKCHAIN ON CONNECT.
 const syncChains = () => {
     request({ url: `${ROOT_NODE_ADDRESS}/api/blocks`}, (err, res, body) => {
         if (!err && res.statusCode === 200) {

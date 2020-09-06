@@ -51,9 +51,11 @@ app.post('/api/transact', (req, res) => {
     // ...Add it to the transaction pool.
     transactionPool.setTransaction(transaction);
     
-    console.log('transactionPool', transactionPool);
-
     res.json({ type: 'success', transaction });
+})
+
+app.get('/api/transaction-pool-map', (req, res) => {
+    res.json(transactionPool.transactionMap)
 })
 
 // BLOCKCHAIN: SYNC BLOCKCHAIN INSTANCE TO CURRENT BLOCKCHAIN ON CONNECT.

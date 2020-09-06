@@ -32,4 +32,10 @@ describe('TransactionPool', () => {
             .toBe(transaction);
         })
     })
+
+    describe('viewTransactions()', () => {
+        it('returns all transactions from a given wallet', () => {
+            
+        })
+    })
 })

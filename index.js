@@ -10,7 +10,7 @@ const app = express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool;
 const wallet = new Wallet();
-const pubsub = new PubSub( { blockchain });
+const pubsub = new PubSub( { blockchain, transactionPool });
 
 app.use(express.json());
 
@@ -50,6 +50,9 @@ app.post('/api/transact', (req, res) => {
 
     // ...Add it to the transaction pool.
     transactionPool.setTransaction(transaction);
+
+    // ... Broadcast the transaction so that users can add it to their transaction pool.
+    pubsub.broadcastTransaction(transaction);
     
     res.json({ type: 'success', transaction });
 })

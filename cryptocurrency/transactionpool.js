@@ -9,6 +9,10 @@ class TransactionPool {
         this.transactionMap[transaction.id] = transaction;
     }
 
+    replaceTransactionMap(transactionMap) {
+        this.transactionMap = transactionMap;
+    }
+
     existingTransaction(wallet) {
         const transactions = Object.values(this.transactionMap);
 

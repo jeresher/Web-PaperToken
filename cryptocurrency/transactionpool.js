@@ -24,6 +24,24 @@ class TransactionPool {
             transaction => Transaction.validTransaction(transaction)
         )
     }
+
+    clear() {
+        this.transactionMap = {};
+    }
+
+    // Safe way of clearing transactions when peers are accepting a new blockchain.
+    // ... There's no chance of it wiping away unaccounted for transactions in the local pool.
+    clearBlockchainTransactions({ chain }) {
+        for (let i=1; i<chain.length; i++) {
+            const block = chain[i];
+
+            for (let transaction of block.data) {
+                if (this.transactionMap[transaction.id]) {
+                    delete this.transactionMap[transaction.id];
+                }
+            }
+        }
+    }
 }
 
 module.exports = TransactionPool;

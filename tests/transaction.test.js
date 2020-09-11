@@ -1,6 +1,8 @@
 const Transaction = require('../cryptocurrency/transaction');
 const Wallet = require('../cryptocurrency/wallet');
 const { verifySignature } = require('../config/util');
+const { REWARD_INPUT, MINING_REWARD } = require('../config/default');
+const TransactionPool = require('../cryptocurrency/transactionpool');
 
 
 describe('Transaction', () => {
@@ -80,7 +82,6 @@ describe('Transaction', () => {
 
     })
 
-    // The update function is going to have the ability to add a new amount for a new recipient in an existing transactions OutputMap.
     describe('update()', () => {
         let originalSignature, originalSenderOutput, nextRecipient, nextAmount;
 
@@ -144,4 +145,24 @@ describe('Transaction', () => {
             
         })
     })
+
+    describe('rewardTransaction()', () => {
+        let minerWallet, rewardTransaction;
+
+        beforeEach(() => {
+            minerWallet = new Wallet();
+            rewardTransaction = Transaction.rewardTransaction(minerWallet);
+        })
+
+        
+        it('creates a transaction with the reward input', () => {
+            expect(rewardTransaction.input).toEqual(REWARD_INPUT);
+        })
+
+        
+        it('creates one transaction for the miner with the `MINING_REWARD`', () => {
+            expect(rewardTransaction.outputMap[minerWallet.publicKey]).toEqual(MINING_REWARD);
+        })
+        
+    });
 });

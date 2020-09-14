@@ -15,13 +15,16 @@ class Blockchain {
         this.chain.push(newBlock);
     }
 
-    replaceChain(chain) {
+    replaceChain(chain, onSuccess) {
 
         // CHECK IF INCOMING CHAIN IS LONGER.
         if (chain.length <= this.chain.length) return;
 
         // CHECK IF INCOMING CHAIN IS VALID.
         if (!Blockchain.isValidChain(chain)) return;
+
+        // CALLBACK FUNCTION ON SUCCESS.
+        if (onSuccess) onSuccess();
 
         this.chain = chain;
     }

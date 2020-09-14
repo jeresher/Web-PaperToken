@@ -2,8 +2,9 @@ const express = require('express');
 const request = require('request');
 const Blockchain = require('./blockchain/blockchain');
 const PubSub = require('./network/pubsub');
-const TransactionPool = require('./cryptocurrency/transactionpool')
-const Wallet = require('./cryptocurrency/wallet')
+const TransactionPool = require('./cryptocurrency/transactionpool');
+const Wallet = require('./cryptocurrency/wallet');
+const TransactionMiner = require('./cryptocurrency/transactionminer');
 const { PORT, ROOT_NODE_ADDRESS, DEFAULT_PORT } = require('./config/port');
 
 const app = express();
@@ -11,6 +12,7 @@ const blockchain = new Blockchain();
 const transactionPool = new TransactionPool;
 const wallet = new Wallet();
 const pubsub = new PubSub( { blockchain, transactionPool });
+const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub});
 
 app.use(express.json());
 
@@ -60,6 +62,12 @@ app.post('/api/transact', (req, res) => {
 app.get('/api/transaction-pool-map', (req, res) => {
     res.json(transactionPool.transactionMap)
 })
+
+app.get('/api/mine-transactions', (req, res) => {
+    transactionMiner.mineTransactions();
+
+    res.redirect('/api/blocks');
+});
 
 // BLOCKCHAIN: SYNC BLOCKCHAIN INSTANCE TO CURRENT BLOCKCHAIN ON CONNECT.
 const syncOnConnect = () => {

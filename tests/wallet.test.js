@@ -63,7 +63,7 @@ describe('Wallet', () => {
 
             it('creates an instance of `Transaction`', () => {
                 expect(transaction instanceof Transaction).toBe(true);
-            });
+            })
 
             it('matches the transaction input with the wallet', () => {
                 expect(transaction.input.address).toEqual(wallet.publicKey);
@@ -71,6 +71,26 @@ describe('Wallet', () => {
 
             it('outputs the amount the recipient', () => {
                 expect(transaction.outputMap[recipient]).toEqual(amount);
+            })
+        });
+
+        describe('and a chain is passed', () => {
+            it('calls `Wallet.calculateBalance`', () => {
+                const calculateBalanceMock = jest.fn();
+
+                const originalCalculateBalance = Wallet.calculateBalance;
+
+                Wallet.calculateBalance = calculateBalanceMock;
+
+                wallet.createTransaction({
+                    recipient: 'foo',
+                    amount: 10,
+                    chain: new Blockchain().chain
+                })
+
+                expect(calculateBalanceMock).toHaveBeenCalled();
+
+                Wallet.calculateBalance = originalCalculateBalance;
             })
         });
 

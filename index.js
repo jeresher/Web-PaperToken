@@ -69,6 +69,16 @@ app.get('/api/mine-transactions', (req, res) => {
     res.redirect('/api/blocks');
 });
 
+// CRYPTOCURRENCY: GET REQUEST TO RETRIEVE WALLET INFO.
+app.get('/api/wallet-info', (req, res) => {
+    const address = wallet.publicKey;
+
+    res.json({
+        address,
+        balance: Wallet.calculateBalance({ chain: blockchain.chain, address })
+    })
+})
+
 // BLOCKCHAIN: SYNC BLOCKCHAIN INSTANCE TO CURRENT BLOCKCHAIN ON CONNECT.
 const syncOnConnect = () => {
 

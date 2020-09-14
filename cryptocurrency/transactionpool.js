@@ -25,11 +25,12 @@ class TransactionPool {
         )
     }
 
+    // (BRUTE CLEAR) Called by the miner who successfully mines a new block.
     clear() {
         this.transactionMap = {};
     }
 
-    // Safe way of clearing transactions when peers are accepting a new blockchain.
+    // (SAFE CLEAR) Called by peers when accepting a new blockchain.
     // ... There's no chance of it wiping away unaccounted for transactions in the local pool.
     clearBlockchainTransactions({ chain }) {
         for (let i=1; i<chain.length; i++) {

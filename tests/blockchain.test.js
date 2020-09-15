@@ -94,16 +94,21 @@ describe('Blockchain', () => {
         });
 
         describe('when the chain is longer', () => {
+            let wallet, transactionOne, transactionTwo, transactionThree, rewardTransaction;
 
             beforeEach(() => {
-                newChain.addBlock({ data: 'Red' });
-                newChain.addBlock({ data: 'Blue' });
-                newChain.addBlock({ data: 'Green' });
+                wallet = new Wallet();
+                transactionOne = wallet.createTransaction({ recipient: 'foo-one', amount: 88 })
+                transactionTwo = wallet.createTransaction({ recipient: 'foo-two', amount: 88 })
+                transactionThree = wallet.createTransaction({ recipient: 'foo-three', amount: 88 })
+                rewardTransaction = Transaction.rewardTransaction(wallet)
+
+                newChain.addBlock({ data: [transactionOne, transactionTwo, transactionThree, rewardTransaction] });
             })
 
             describe('and the chain is invalid', () => {
                 it('does not replace the chain', () => {
-                    newChain.chain[2].hash = 'fake-hash';
+                    newChain.chain[1].hash = 'fake-hash';
                     blockchain.replaceChain(newChain.chain);
                     expect(blockchain.chain).toEqual(originalChain);
                 })

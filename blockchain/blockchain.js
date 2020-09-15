@@ -26,6 +26,9 @@ class Blockchain {
         // CHECK IF INCOMING CHAIN IS VALID.
         if (!Blockchain.isValidChain(chain)) return;
 
+        // CHECK IF INCOMING CHAIN HAS INVALID DATA.
+        if (!this.validTransactionData({ chain })) return;
+
         // CALLBACK FUNCTION ON SUCCESS.
         if (onSuccess) onSuccess();
 

@@ -35,6 +35,7 @@ class Blockchain {
     validTransactionData({ chain }) {
         for (let i=1; i<chain.length; i++) {
             const block = chain[i];
+            const transactionSet = new Set();
             let rewardTransactionCount = 0;
 
             for (let transaction of block.data) {
@@ -66,6 +67,13 @@ class Blockchain {
                     // CHECK IF SENDER AMOUNT IS INVALID/FALSIFIED.
                     if (transaction.input.amount !== trueBalance) {
                         return false;
+                    }
+
+                    // CHECK IF THERE ARE IDENTICAL TRANSACTIONS.
+                    if (transactionSet.has(transaction)) {
+                        return false;
+                    } else {
+                        transactionSet.add(transaction);
                     }
                 }
             }

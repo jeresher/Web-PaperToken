@@ -183,7 +183,7 @@ describe('Blockchain', () => {
                         signature: wallet.sign(falsifiedOutputMap)
                     },
                     outputMap: falsifiedOutputMap
-                }
+                 }
 
                 newChain.addBlock({ data: [falsifiedTransaction, rewardTransaction] })
 
@@ -192,7 +192,13 @@ describe('Blockchain', () => {
         })
 
         describe('and a block contains multiple identical transactions', () => {
-            it('returns false', () => {});
+            it('returns false', () => {
+                newChain.addBlock({
+                    data: [transaction, transaction, transaction, rewardTransaction] 
+                })
+
+                expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
+            });
         })
 
     })

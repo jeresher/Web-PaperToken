@@ -1,5 +1,6 @@
 const Block = require('./block');
 const Transaction = require('../cryptocurrency/transaction');
+const Wallet = require('../cryptocurrency/wallet');
 const { cryptoHash } = require('../config/util');
 const { REWARD_INPUT, MINING_REWARD } = require('../config/default');
 
@@ -45,15 +46,25 @@ class Blockchain {
                         return false;
                     }
 
-                    // CHECK IF MINING REWARD AMOUNT IS INVALID.
+                    // CHECK IF MINING REWARD AMOUNT IS INVALID/FALSIFIED.
                     if (Object.values(transaction.outputMap)[0] !== MINING_REWARD) {
                         return false;
                     }
 
                 } else {
                     
-                    // CHECK IF THE TRANSACTION IS VALID.
+                    // CHECK IF THE TRANSACTION IS INVALID/FALSIFIED.
                     if (!Transaction.validTransaction(transaction)) {
+                        return false;
+                    }
+
+                    const trueBalance = Wallet.calculateBalance({
+                        chain: this.chain,
+                        address: transaction.input.address
+                    })
+
+                    // CHECK IF SENDER AMOUNT IS INVALID/FALSIFIED.
+                    if (transaction.input.amount !== trueBalance) {
                         return false;
                     }
                 }

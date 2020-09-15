@@ -166,8 +166,29 @@ describe('Blockchain', () => {
             })
         })
 
-        describe('and the trnasaction data has at least one malformed input', () => {
-            it('returns false', () => {});
+        describe('and the transaction data has at least one malformed input', () => {
+            it('returns false', () => {
+                wallet.balance = 9000;
+
+                const falsifiedOutputMap = {
+                    [wallet.publicKey]: 8900,
+                    fooRecipient: 100
+                }
+
+                const falsifiedTransaction = {
+                    input: {
+                        timestamp: Date.now(),
+                        amount: wallet.balance,
+                        address: wallet.publicKey,
+                        signature: wallet.sign(falsifiedOutputMap)
+                    },
+                    outputMap: falsifiedOutputMap
+                }
+
+                newChain.addBlock({ data: [falsifiedTransaction, rewardTransaction] })
+
+                expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
+            });
         })
 
         describe('and a block contains multiple identical transactions', () => {

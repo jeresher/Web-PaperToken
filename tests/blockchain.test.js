@@ -124,7 +124,7 @@ describe('Blockchain', () => {
         beforeEach(() => {
             wallet = new Wallet();
             transaction = wallet.createTransaction({ recipient: 'foo-address', amount: 88 })
-            rewardTransaction = Transaction.rewardTransaction({ minerWallet: wallet })
+            rewardTransaction = Transaction.rewardTransaction(wallet)
         })
 
         describe('and the transaction data is valid', () => {
@@ -156,7 +156,13 @@ describe('Blockchain', () => {
             })
 
             describe('and the transaction is a reward transaction', () => {
-                it('returns false', () => {})
+                it('returns false', () => {
+                    rewardTransaction.outputMap[wallet.publicKey] = 88888;
+
+                    newChain.addBlock({ data: [transaction, rewardTransaction] });
+
+                    expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
+                })
             })
         })
 

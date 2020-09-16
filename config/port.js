@@ -1,4 +1,4 @@
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 5000;
 let PEER_PORT;
 
 if (process.env.GENERATE_PEER_PORT === 'true') {

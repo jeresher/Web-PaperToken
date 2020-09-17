@@ -26,7 +26,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #F7F7F7;
+    background-color: #0d0f15;
     line-height: 1;
 }
 ol, ul {
@@ -55,42 +55,52 @@ table {
 .navigation-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100vw;
     height: 8vh;
-    background-color: black;
+    /* background-color: blue; */
     color: white;
     font-weight: 800;
 }
 
-.logo {
-    padding-left: 2vw;
+.navigation-container div {
+    flex: 1;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
-.logo img {
-    width: 2.6vw;
+.navigation-container div:first-child > img {
+    margin-left: 2vw;
+    margin-right: auto;
+    width: 3vw;
 }
 
-.logo h1 {
-    color: white;
-    font-size: 21px;
-    font-weight: 500;
+.navigation-container div:last-child {
+    margin-left: auto;
 }
 
 .navigation {
-    padding-right: 2vw;
     display: flex;
+    align-self: flex-start;
+    /* background-color: red; */
 }
 
 .navigation button {
-    margin-left: 1vw;
-    color: white;
-    font-size: 15px;
-    font-weight: 800;
-    border: 0;
+    outline: none;
+    border: none;
+    border-top: 3px solid transparent;
+    margin: 3px 2.2vw;
+    padding: 3vh 0 0 0;
+    color: #4A4D50;
+    font-family: Times, serif;
+    font-size: 17px;
+    font-weight: 500;
     background-color: transparent;
+}
+
+.activelink button {
+    border-top: 3px solid white;
+    font-weight: 500;
+    color: white;
 }
 
 /* CONTENT CONTAINER */

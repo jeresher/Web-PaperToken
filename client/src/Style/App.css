@@ -44,7 +44,12 @@ table {
     border-spacing: 0;
 }
 
-/* NAVIGATION BAR */
+/* MAIN CONTAINER */
+
+.main-container {
+}
+
+/* NAV CONTAINER */
 
 .navigation-container {
     display: flex;
@@ -52,17 +57,25 @@ table {
     justify-content: space-between;
     width: 100vw;
     height: 8vh;
-    background-color: #12171D;
+    background-color: black;
     color: white;
     font-weight: 800;
 }
 
 .logo {
     padding-left: 2vw;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 2.6vw;
 }
 
 .logo h1 {
-    font-size: 25px;
+    color: white;
+    font-size: 21px;
+    font-weight: 500;
 }
 
 .navigation {
@@ -77,4 +90,10 @@ table {
     font-weight: 800;
     border: 0;
     background-color: transparent;
+}
+
+/* CONTENT CONTAINER */
+
+.content-container {
+    background-color: red;
 }

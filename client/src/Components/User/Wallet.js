@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Home() {
+function Wallet() {
     return (
       <div className="wallet-container">
-        <h1>wallet</h1>
+        <h1>Home</h1>
       </div>
     );
-  }
-  
-export default Home;
+}
+
+export default Wallet;

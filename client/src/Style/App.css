@@ -26,6 +26,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #F7F7F7;
     line-height: 1;
 }
 ol, ul {
@@ -95,5 +96,39 @@ table {
 /* CONTENT CONTAINER */
 
 .content-container {
+}
+
+/* HOME CONTAINER */
+
+.home-container {
+}
+
+/* MINER CONTAINER */
+
+.miner-container {
+
+}
+
+/* USER CONTAINER */
+
+.user-container {
+    padding: 3vh 3vw;
+    background-color: grey;
+}
+
+.user-container .firstrow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.firstrow .wallet-container {
+    width: 33vw;
     background-color: red;
 }
+
+.firstrow .transaction-container {
+    flex-grow: 2;
+    margin-left: 2vw;
+    background-color: blue;
+}
+

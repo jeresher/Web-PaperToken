@@ -1,12 +1,93 @@
 import React, { useEffect } from 'react';
+import * as THREE from 'three';
+import star from "../Assets/star.png";
+
+let scene, camera, renderer, id, starGeo, stars;
+
+function init() {
+  scene = new THREE.Scene();
+
+  camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.z = 1;
+  camera.rotation.x = Math.PI/2;
+  
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  starGeo = new THREE.Geometry();
+  for(let i=0;i<6000;i++) {
+      let star = new THREE.Vector3(
+      Math.random() * 600 - 300,
+      Math.random() * 600 - 300,
+      Math.random() * 600 - 300
+    );
+    star.velocity = 0;
+    star.acceleration = 0.02;
+    starGeo.vertices.push(star);
+  }
+
+  let sprite = new THREE.TextureLoader().load(star);
+  let starMaterial = new THREE.PointsMaterial({
+    color: 0xaaaaaa,
+    size: 0.7,
+    map: sprite
+  });
+
+  stars = new THREE.Points(starGeo,starMaterial);
+  scene.add(stars);
+
+  if (id) cancelAnimationFrame(id);
+
+  var animate = function () {
+    starGeo.vertices.forEach(p => {
+      p.velocity += p.acceleration
+      p.y -= p.velocity;
+      
+      if (p.y < -200) {
+        p.y = 200;
+        p.velocity = 0;
+      }
+    });
+    starGeo.verticesNeedUpdate = true; 
+    stars.rotation.y +=0.002;
+    id = requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  };
+
+  animate();
+}
+
+function clearThree(obj){
+  while(obj.children.length > 0){ 
+    clearThree(obj.children[0])
+    obj.remove(obj.children[0]);
+  }
+  if(obj.geometry) obj.geometry.dispose()
+
+  if(obj.material){ 
+    //in case of map, bumpMap, normalMap, envMap ...
+    Object.keys(obj.material).forEach(prop => {
+      if(!obj.material[prop])
+        return         
+      if(obj.material[prop] !== null && typeof obj.material[prop].dispose === 'function')                                  
+        obj.material[prop].dispose()                                                        
+    })
+    obj.material.dispose()
+  }
+}  
 
 function Home() {
 
-  useEffect(() => {console.log('nice')}, []);
+  useEffect(() => {
+    init();
+    return () => {
+      clearThree(scene);
+    }
+  }, [])
 
   return (
-    <div className="wallet-container">
-      <h1 style={{color:'red'}}>Home</h1>
+    <div className="home-container">
     </div>
   );
 }

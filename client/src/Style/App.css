@@ -26,7 +26,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #0d0f15;
+    background-color: black;
     line-height: 1;
 }
 ol, ul {
@@ -117,6 +117,13 @@ canvas {
     display: flex;
 }
 
+.mini-divider {
+    margin: .7vh 0;
+    width: 1.4vw;
+    height: .2vh;
+    background-color: white;
+}
+
 /* HOME CONTAINER */
 
 .home-container {
@@ -168,25 +175,121 @@ canvas {
 }
 
 .user-container .firstrow {
-    padding: 3vh 3vw;
+    padding: 6vh 9vw 0vh 9vw;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
 }
 
 .firstrow .wallet-container {
-    width: 33vw;
-    background-color: red;
+    padding: 4vh 2vw;
+    width: 29vw;
+    height: 20vh;
+    color: white;
+    background-color: #121212;
+    border-radius: 10px;
 }
 
 .firstrow .transaction-container {
+    padding: 4vh 2vw;
     flex-grow: 2;
-    margin-left: 2vw;
-    background-color: blue;
+    height: 20vh;
+    margin-left: 1vw;
+    color: white;
+    background-color: #121212;
+    border-radius: 10px;
 }
 
 .user-container .secondrow {
-    padding: 3vh 3vw;
-
+    padding: 1vw 9vw;
 }
 
+.secondrow .history-container {
+    padding: 4vh 2vw;
+    height: 40vh;
+    color: white;
+    background-color: #121212;
+    border-radius: 10px;
+}
+
+/* USER: WALLET CONTAINER */
+
+.wallet-container h1 {
+    font-size: 1.7vw;
+    font-weight: 500;
+}
+
+/* USER: TRANSACTION CONTAINER */
+
+.transaction-container h1 {
+    font-size: 1.7vw;
+    font-weight: 500;
+}
+
+.transaction-form {
+    color: #979797;
+}
+
+
+.transaction-form .flex-row {
+    margin: 2.7vh 0;
+    display: flex;
+    align-items: center;
+}
+
+.transaction-form .flex-row h4 {
+    font-size: 1vw;
+    flex-basis: 25%;
+}
+
+.transaction-form .flex-row input {
+    width: 65%;
+    height: 20px;
+    color: white;
+    background-color: #393F43;
+    border: 0;
+    border-radius: 3px;
+    /* border-bottom: 1px solid #5E5F62; */
+}
+
+.transaction-form button {
+    margin-right: 4.1vw;
+    float: right;
+    padding: 1vh 1.1vw;
+    color: #1b1b1b;
+    font-size: .9vw;
+    font-weight: 900;
+    background-color: #33BF91;
+    border: 0;
+    border-radius: 2px;
+}
+
+
+
+.detail-split-box {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 3%;
+}
+
+.detail-split-box h6 {
+    margin: 0;
+    flex-basis: 20%;
+}
+
+.detail-split-box input, select {
+    width: 74%;
+    background-color: white;
+    border: 1px solid #CCCFD8;
+    border-radius: 3px;
+    height: 25px;
+}
+
+/* USER: HISTORY CONTAINER */
+
+.history-container h1 {
+    font-size: 1.7vw;
+    font-weight: 500;
+}
 

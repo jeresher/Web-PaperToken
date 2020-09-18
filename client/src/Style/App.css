@@ -219,6 +219,38 @@ canvas {
     font-weight: 500;
 }
 
+.wallet-info {
+    margin-top: 2.5vh;
+    display: flex;
+}
+
+.wallet-box {
+    flex-basis: 50%;
+}
+
+.wallet-box h4 {
+    margin-bottom: 1vh;
+    font-size: 1vw;
+    color: #979797;
+}
+
+.wallet-box textarea {
+    width: 90%;
+    height: 13vh;
+    color: white;
+    background-color: transparent;
+    border: none;
+    resize: none;
+}
+
+.wallet-box h6 {
+    font-size: 3.2vw;
+    color: #F0B909;
+    font-weight: 300;
+    height: 13vh;
+    line-height: 13vh;
+}
+
 /* USER: TRANSACTION CONTAINER */
 
 .transaction-container h1 {
@@ -244,12 +276,11 @@ canvas {
 
 .transaction-form .flex-row input {
     width: 65%;
-    height: 20px;
+    height: 3vh;
     color: white;
-    background-color: #393F43;
+    background-color: #222629;
     border: 0;
     border-radius: 3px;
-    /* border-bottom: 1px solid #5E5F62; */
 }
 
 .transaction-form button {
@@ -259,31 +290,9 @@ canvas {
     color: #1b1b1b;
     font-size: .9vw;
     font-weight: 900;
-    background-color: #33BF91;
+    background-color: #F0B909;
     border: 0;
     border-radius: 2px;
-}
-
-
-
-.detail-split-box {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 3%;
-}
-
-.detail-split-box h6 {
-    margin: 0;
-    flex-basis: 20%;
-}
-
-.detail-split-box input, select {
-    width: 74%;
-    background-color: white;
-    border: 1px solid #CCCFD8;
-    border-radius: 3px;
-    height: 25px;
 }
 
 /* USER: HISTORY CONTAINER */

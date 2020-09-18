@@ -5,11 +5,11 @@ function Transaction() {
         <div className="transaction-container">
             <h1>Create a Transaction</h1>
             <div className="transaction-form">
-                <div className="public-key flex-row">
+                <div className="flex-row">
                     <h4>Recipient's Public Key</h4>
                     <input type="text"></input>
                 </div>
-                <div className="amount flex-row">
+                <div className="flex-row">
                     <h4>Send Amount</h4>
                     <input type="number" max="30"></input>
                 </div>

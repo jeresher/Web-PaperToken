@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -55,7 +55,10 @@ canvas {
 /* MAIN CONTAINER */
 
 .main-container {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
 }
 
 /* NAV CONTAINER */
@@ -63,15 +66,12 @@ canvas {
 .navigation-container {
     display: flex;
     align-items: center;
-    width: 100vw;
     height: 8vh;
-    /* background-color: blue; */
     color: white;
     font-weight: 800;
 }
 
 .navigation-container div {
-    flex: 1;
     display: flex;
     justify-content: center;
 }
@@ -89,7 +89,6 @@ canvas {
 .navigation {
     display: flex;
     align-self: flex-start;
-    /* background-color: red; */
 }
 
 .navigation button {
@@ -114,14 +113,33 @@ canvas {
 /* CONTENT CONTAINER */
 
 .content-container {
+    flex: 2;
+    display: flex;
 }
 
 /* HOME CONTAINER */
 
 .home-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    align-self: center;
+    justify-self: center;
+}
+
+.home-container h1 {
+    color: rgb(214, 213, 213);
+    font-size: 6vw;
+    font-weight: 100;
+}
+
+.home-container span {
+    font-weight: 300;
+    color: white;
+}
+
+.home-container h3 {
+    margin-top: 2vh;
+    line-height: 3.5vh;
+    font-size: 1.1vw;
+    color: #b8b8b8;
 }
 
 /* MINER CONTAINER */

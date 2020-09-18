@@ -122,6 +122,9 @@ canvas {
 .home-container {
     align-self: center;
     justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .home-container h1 {
@@ -142,6 +145,16 @@ canvas {
     color: #b8b8b8;
 }
 
+.home-container button {
+    background-color: transparent;
+    padding: 1vh 1.6vw;
+    border: 1px white solid;
+    color: white;
+    margin-top: 2vh;
+    font-size: 1.1vw;
+    font-weight: 700;
+}
+
 /* MINER CONTAINER */
 
 .miner-container {
@@ -151,11 +164,11 @@ canvas {
 /* USER CONTAINER */
 
 .user-container {
-    padding: 3vh 3vw;
-    background-color: grey;
+    width: 100vw;
 }
 
 .user-container .firstrow {
+    padding: 3vh 3vw;
     display: flex;
     justify-content: space-between;
 }
@@ -170,3 +183,10 @@ canvas {
     margin-left: 2vw;
     background-color: blue;
 }
+
+.user-container .secondrow {
+    padding: 3vh 3vw;
+
+}
+
+

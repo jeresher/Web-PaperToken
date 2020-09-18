@@ -13,6 +13,7 @@ function Home() {
     <div className="home-container">
       <h1>Paper<span>Token</span></h1>
       <h3>A full-fledged cryptocurrency and platform designed to <br /> showcase the innerworkings of blockchain technology.</h3>
+      <button>Start Now</button>
     </div>
   );
 }

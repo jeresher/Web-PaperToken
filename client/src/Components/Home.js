@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import * as THREE from 'three';
 import star from "../Assets/star.png";
+import Background from "../Animation/Background"
 
 let scene, camera, renderer, id, starGeo, stars;
 
@@ -59,6 +60,7 @@ function init() {
 }
 
 function clearThree(obj){
+  console.log(obj.children.length);
   while(obj.children.length > 0){ 
     clearThree(obj.children[0])
     obj.remove(obj.children[0]);
@@ -75,14 +77,17 @@ function clearThree(obj){
     })
     obj.material.dispose()
   }
-}  
+}
 
 function Home() {
 
+  let background = new Background;
+
+
   useEffect(() => {
-    init();
+    background.start();
     return () => {
-      clearThree(scene);
+      background.end();
     }
   }, [])
 

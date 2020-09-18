@@ -8,7 +8,7 @@ function NavBar() {
 
         <div className="logo">
 
-          <img src={logo} onClick={() => window.location.reload()}></img>
+          {/* <img src={logo} onClick={() => window.location.reload()}></img> */}
 
         </div>
 

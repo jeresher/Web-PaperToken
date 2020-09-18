@@ -45,9 +45,17 @@ table {
     border-spacing: 0;
 }
 
+canvas {
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+}
+
 /* MAIN CONTAINER */
 
 .main-container {
+
 }
 
 /* NAV CONTAINER */
@@ -111,6 +119,9 @@ table {
 /* HOME CONTAINER */
 
 .home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* MINER CONTAINER */
@@ -141,4 +152,3 @@ table {
     margin-left: 2vw;
     background-color: blue;
 }
-

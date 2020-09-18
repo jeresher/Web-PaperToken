@@ -16,6 +16,15 @@ const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wal
 
 app.use(express.json());
 
+//Temporary for CORS.
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE")
+    res.header("Access-Control-Expose-Headers", "auth-token");
+    res.header("Access-Control-Allow-Headers", "auth-token, Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // BLOCKCHAIN: GET REQUEST TO RETRIEVE THE CHAIN.
 app.get('/api/blocks', (req, res) => {
     res.send(blockchain.chain);

@@ -165,7 +165,32 @@ canvas {
 /* MINER CONTAINER */
 
 .miner-container {
+    width: 100vw;
+}
 
+.miner-inner-container {
+    padding: 6vh 9vw 0vh 9vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.transactionpool-container {
+    width: 29vw;
+    height: 70vh;
+    padding: 4vh 2vw;
+    color: white;
+    background-color: #121212;
+    border-radius: 10px;
+}
+
+.blockchain-container {
+    flex-grow: 2;
+    height: 70vh;
+    padding: 4vh 2vw;
+    margin-left: 1vw;
+    color: white;
+    background-color: #121212;
+    border-radius: 10px;
 }
 
 /* USER CONTAINER */
@@ -182,18 +207,18 @@ canvas {
 }
 
 .firstrow .wallet-container {
-    padding: 4vh 2vw;
     width: 29vw;
     height: 20vh;
+    padding: 4vh 2vw;
     color: white;
     background-color: #121212;
     border-radius: 10px;
 }
 
 .firstrow .transaction-container {
-    padding: 4vh 2vw;
     flex-grow: 2;
     height: 20vh;
+    padding: 4vh 2vw;
     margin-left: 1vw;
     color: white;
     background-color: #121212;

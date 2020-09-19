@@ -1,8 +1,15 @@
 import React from 'react';
+import TransactionPool from './Miner/TransactionPool';
+import Blockchain from './Miner/Blockchain';
 
 function Miner() {
     return (
-        <h1>Miner</h1>
+      <div className="miner-container">
+        <div className="miner-inner-container">
+          <TransactionPool />
+          <Blockchain />
+        </div>
+      </div>
     );
   }
   

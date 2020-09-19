@@ -55,6 +55,52 @@ class Wallet {
 
         return hasConductedTransaction ? outputsTotal : STARTING_BALANCE + outputsTotal
     }
+
+    static retrieveTransactions({ map, chain, address }) {
+        let allTransactions = [];
+        
+        // Scan transaction pool for transactions from provided address.
+        if (Object.keys(map).length > 0) {
+            for (let transaction of Object.values(map)) {
+                if(transaction.input.address === address) {
+                    for (const [publicKey, amount] of Object.entries(transaction.outputMap)) {
+                        if (publicKey !== address) {
+                            allTransactions.push({
+                                timestamp: transaction.input.timestamp,
+                                recipient: publicKey,
+                                amount: amount,
+                                status: "Pending"
+                            })
+                        }
+                    }
+                }
+            }
+        }
+
+        // Scan blockchain for transactions from provided address.
+        for (let i=1; i<chain.length; i++) {
+            const block = chain[i];
+            
+            for (let transaction of block.data) {
+                if(transaction.input.address === address) {
+
+                    for (const [publicKey, amount] of Object.entries(transaction.outputMap)) {
+                        if (publicKey !== address) {
+                            allTransactions.push({
+                                timestamp: transaction.input.timestamp,
+                                recipient: publicKey,
+                                amount: amount,
+                                status: "Completed"
+                            })
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return allTransactions;
+    }
 }
 
 module.exports = Wallet;

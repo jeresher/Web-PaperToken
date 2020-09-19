@@ -84,7 +84,8 @@ app.get('/api/wallet-info', (req, res) => {
 
     res.json({
         address,
-        balance: Wallet.calculateBalance({ chain: blockchain.chain, address })
+        balance: Wallet.calculateBalance({ chain: blockchain.chain, address }),
+        transactions: Wallet.retrieveTransactions({ map: transactionPool.transactionMap, chain: blockchain.chain, address })
     })
 })
 

@@ -43,7 +43,8 @@ app.post('/api/mine', (req, res) => {
 
 // CRYPTOCURRENCY: POST REQUEST TO SEND CURRENCY.
 app.post('/api/transact', (req, res) => {
-    const { amount, recipient } = req.body;
+    var { amount, recipient } = req.body;
+    amount = Number(amount);
 
     // ...Check if this wallet already has an existing transaction in the transaction pool.
     let transaction = transactionPool.existingTransaction(wallet); 

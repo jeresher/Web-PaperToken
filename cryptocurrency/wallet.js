@@ -1,6 +1,6 @@
 const Transaction = require('./transaction');
 const { STARTING_BALANCE } = require('../config/default')
-const { ec, cryptoHash } = require('../config/util');
+const { ec, cryptoHash, convertDate } = require('../config/util');
 
 class Wallet {
     constructor() {
@@ -59,16 +59,16 @@ class Wallet {
     static retrieveTransactions({ map, chain, address }) {
         let allTransactions = [];
         
-        // Scan transaction pool for transactions from provided address.
+        // Scan transaction pool for outbound transactions from provided address.
         if (Object.keys(map).length > 0) {
             for (let transaction of Object.values(map)) {
                 if(transaction.input.address === address) {
                     for (const [publicKey, amount] of Object.entries(transaction.outputMap)) {
                         if (publicKey !== address) {
                             allTransactions.push({
-                                timestamp: transaction.input.timestamp,
+                                date: convertDate(transaction.input.timestamp),
                                 recipient: publicKey,
-                                amount: amount,
+                                amount: Math.abs(amount) * -1,
                                 status: "Pending"
                             })
                         }
@@ -77,7 +77,7 @@ class Wallet {
             }
         }
 
-        // Scan blockchain for transactions from provided address.
+        // Scan blockchain for outbound transactions from provided address.
         for (let i=1; i<chain.length; i++) {
             const block = chain[i];
             
@@ -87,9 +87,9 @@ class Wallet {
                     for (const [publicKey, amount] of Object.entries(transaction.outputMap)) {
                         if (publicKey !== address) {
                             allTransactions.push({
-                                timestamp: transaction.input.timestamp,
+                                date: convertDate(transaction.input.timestamp),
                                 recipient: publicKey,
-                                amount: amount,
+                                amount: Math.abs(amount) * -1,
                                 status: "Completed"
                             })
                         }

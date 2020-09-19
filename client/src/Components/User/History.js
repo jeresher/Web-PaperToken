@@ -1,6 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import HistoryItem from './HistoryItem';
 
 function History() {
+
+    const [history, setHistory] = useState([]);
+    const [historyItem, setHistoryItems] = useState([]);
+
+    function retrieveTransactions() {
+        fetch("http://localhost:5000/api/wallet-info")
+        .then(res => res.json())
+        .then(result => {
+            setHistory(result);
+            setHistoryItems(result.transactions.map(history => 
+                <HistoryItem history={history} />
+            ))
+        })
+        .catch(err => console.log(err))
+      }
+
+
+    useEffect(retrieveTransactions, [])
+
     return (
       <section className="history-container">
         <h1>Your Transactions</h1>
@@ -15,149 +35,12 @@ function History() {
                     </tr>
                 </thead>
                 <tbody>
+                    {historyItem}
                     <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
-                    </tr>
-                    <tr>
-                        <td className="history-date">11/07/1998</td>
-                        <td className="history-recipient">044463856e958851f3706e747df6b5823e2ac15cbd597a027ecd9211225610e0e2966792d017d4ad2cbfa414865ac6aa84b2ebb42ad5ab31527739874fa2a31a1b</td>
-                        <td className="history-amount">3000</td>
-                        <td className="history-status">Pending</td>
+                        <td className="history-date">9/18/2020</td>
+                        <td className="history-recipient">{history.address}</td>
+                        <td className="history-amount">1000</td>
+                        <td className="history-status">Completed</td>
                     </tr>
                 </tbody>
             </table>

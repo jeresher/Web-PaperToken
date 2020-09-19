@@ -20,8 +20,18 @@ const verifySignature = ({ publicKey, data, signature }) => {
     return keyFromPublic.verify(cryptoHash(data), signature);
 };
 
+const convertDate = (timestamp) => {
+    var date = new Date(timestamp);
+    var dd = date.getDate();
+    var mm = date.getMonth()+1;
+    var yyyy= date.getFullYear();
+
+    return `${mm}/${dd}/${yyyy}`;
+}
+
 module.exports = { 
     cryptoHash,
     ec,
-    verifySignature
+    verifySignature,
+    convertDate
 };

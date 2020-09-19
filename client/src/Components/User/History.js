@@ -23,7 +23,7 @@ function History() {
 
     return (
       <section className="history-container">
-        <h1>Your Transactions</h1>
+        <h1>Transaction History</h1>
         <div className="history-table">
             <table>
                 <thead>

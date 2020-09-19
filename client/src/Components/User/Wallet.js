@@ -19,13 +19,13 @@ function Wallet() {
       <div className="wallet-info">         
         <div className="wallet-box">
           <h4>Balance</h4>
-          <h6>{wallet ? wallet.balance : "Loading..."}</h6>
+          <h6>{wallet ? wallet.balance : null}</h6>
         </div>  
         <div className="wallet-box">
           <h4>Public Key</h4>
           <textarea 
             className="address"
-            value={wallet ? wallet.address : "Loading..."}
+            value={wallet ? wallet.address : null}
             locked
           ></textarea>
         </div>

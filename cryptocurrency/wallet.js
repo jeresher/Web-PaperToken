@@ -77,8 +77,10 @@ class Wallet {
             }
         }
 
+        allTransactions.reverse();
+
         // Scan blockchain for outbound transactions from provided address.
-        for (let i=1; i<chain.length; i++) {
+        for (let i=chain.length-1; i>0; i--) {
             const block = chain[i];
             
             for (let transaction of block.data) {

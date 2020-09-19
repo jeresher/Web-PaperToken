@@ -302,3 +302,57 @@ canvas {
     font-weight: 500;
 }
 
+.history-table {
+    display: flex;
+    width: 100%;
+    margin-top: 2vh;
+    table-layout: fixed;
+    text-align: left;
+}
+
+.history-table tbody, .history-table thead {
+    display: block;
+}
+
+.history-table tbody {
+    overflow-y: scroll;
+    height: 30vh;
+}
+
+.history-table th, .history-table td {
+    padding: 10px 1vw 10px 0;
+}
+
+.history-table th {
+    text-align: left;
+    font-size: 1vw;
+    color: #979797;
+}
+
+.history-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.history-table .history-date {
+    width: 6vw;
+    max-width: 6vw;
+}
+
+.history-table .history-recipient {
+    width: 55vw;
+    max-width: 55vw;
+}
+
+.history-table .history-amount {
+    width: 6vw;
+    max-width: 6vw;
+}
+
+.history-table .history-status {
+    width: 5vw;
+    max-width: 5vw;
+}

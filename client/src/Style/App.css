@@ -193,6 +193,62 @@ canvas {
     border-radius: 10px;
 }
 
+/* MINER: TRANSACTIONPOOL CONTAINER */
+.transactionpool-container h1 {
+    font-size: 1.7vw;
+    font-weight: 500;
+}
+
+.transactionpool-table {
+    display: flex;
+    width: 100%;
+    margin-top: 2.5vh;
+    table-layout: fixed;
+    text-align: left;
+}
+
+.transactionpool-table tbody, .transactionpool-table thead {
+    display: block;
+}
+
+.transactionpool-table tbody {
+    overflow-y: scroll;
+    height: 55vh;
+}
+
+.transactionpool-table th {
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: 1vw;
+    color: #979797;
+}
+
+.transactionpool-table td {
+    padding: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.transactionpool-table .transactionpool-address {
+    width: 23vw;
+    max-width: 23vw;
+    padding-right: 1vw;
+}
+
+.transactionpool-table .transactionpool-date {
+    width: 5vw;
+    max-width: 5vw;
+}
+
+/* MINER: BLOCKCHAIN CONTAINER */
+.blockchain-container h1 {
+    font-size: 1.7vw;
+    font-weight: 500;
+}
+
 /* USER CONTAINER */
 
 .user-container {

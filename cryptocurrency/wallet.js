@@ -68,7 +68,7 @@ class Wallet {
                             allTransactions.push({
                                 date: convertDate(transaction.input.timestamp),
                                 recipient: publicKey,
-                                amount: Math.abs(amount) * -1,
+                                amount: amount,
                                 status: "Pending"
                             })
                         }
@@ -89,7 +89,7 @@ class Wallet {
                             allTransactions.push({
                                 date: convertDate(transaction.input.timestamp),
                                 recipient: publicKey,
-                                amount: Math.abs(amount) * -1,
+                                amount: amount,
                                 status: "Completed"
                             })
                         }

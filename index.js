@@ -6,6 +6,7 @@ const TransactionPool = require('./cryptocurrency/transactionpool');
 const Wallet = require('./cryptocurrency/wallet');
 const TransactionMiner = require('./cryptocurrency/transactionminer');
 const { PORT, ROOT_NODE_ADDRESS, DEFAULT_PORT } = require('./config/port');
+const { convertDate } = require('./config/util')
 
 const app = express();
 const blockchain = new Blockchain();
@@ -71,6 +72,21 @@ app.post('/api/transact', (req, res) => {
 
 app.get('/api/transaction-pool-map', (req, res) => {
     res.json(transactionPool.transactionMap)
+})
+
+app.get('/api/transaction-pool-addresses', (req, res) => {
+    let addresses = [];
+
+    if (Object.keys(transactionPool.transactionMap).length > 0) {
+        for (let transaction of Object.values(transactionPool.transactionMap)) {
+            addresses.push({
+                date: convertDate(transaction.input.timestamp),
+                address: transaction.input.address
+            })
+        }
+    }
+
+    res.json(addresses)
 })
 
 app.get('/api/mine-transactions', (req, res) => {

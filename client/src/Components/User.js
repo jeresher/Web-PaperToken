@@ -7,11 +7,12 @@ import test from '../Assets/test.svg'
 function User() {
     return (
       <div className="user-container">
+        
         <section className="firstrow">
           <Wallet />
           <Transaction />
         </section>
-
+        
         <section className="secondrow">
           <History />
         </section>

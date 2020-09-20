@@ -249,6 +249,57 @@ canvas {
     font-weight: 500;
 }
 
+.blockchain-table {
+    display: flex;
+    width: 100%;
+    margin-top: 2.5vh;
+    table-layout: fixed;
+    text-align: left;
+}
+
+.blockchain-table tbody, .blockchain-table thead {
+    display: block;
+}
+
+.blockchain-table tbody {
+    overflow-y: scroll;
+    height: 55vh;
+}
+
+.blockchain-table th {
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: 1vw;
+    color: #979797;
+}
+
+.blockchain-table td {
+    padding: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.blockchain-table .blockchain-sender {
+    width: 18vw;
+    max-width: 18vw;
+    padding-right: 1vw;
+}
+
+.blockchain-table .blockchain-receiver {
+    width: 18vw;
+    max-width: 18vw;
+    padding-right: 1vw;
+}
+
+.blockchain-table .blockchain-amount {
+    width: 4vw;
+    max-width: 4vw;
+    padding-right: 1vw;
+}
+
 /* USER CONTAINER */
 
 .user-container {

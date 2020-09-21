@@ -165,9 +165,7 @@ function Blockchain() {
                     }}
                 >{"<"}</button>
 
-                <h6
-                    style={{display: 'inline', color:'white'}}
-                >{currentBlockIndex}</h6>
+                <h6>Block {currentBlockIndex}</h6>
 
                 <button
                     onClick={(event) => {

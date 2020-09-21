@@ -300,6 +300,31 @@ canvas {
     padding-right: 1vw;
 }
 
+.blockchain-navigation {
+    padding-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blockchain-navigation h6 {
+    display: inline;
+    font-size: 1.0vw;
+    font-weight: 500;
+    color: #F0B909;
+    padding: 0 .8vw;
+}
+
+.blockchain-navigation button {
+    background-color: transparent;
+    font-family: monospace;
+    border: none;
+    font-size: 1vw;
+    font-weight: 700;
+    word-spacing: 0;
+    color: #5a5a5a;
+}
+
 /* USER CONTAINER */
 
 .user-container {

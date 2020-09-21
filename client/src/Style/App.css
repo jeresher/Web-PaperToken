@@ -243,6 +243,22 @@ canvas {
     max-width: 5vw;
 }
 
+.transactionpool-mine {
+    display: flex;
+    justify-content: center;
+}
+
+.transactionpool-mine button {
+    margin-top: 1vh;
+    padding: 1vh 1.1vw;
+    color: #1b1b1b;
+    font-size: .9vw;
+    font-weight: 900;
+    background-color: #F0B909;
+    border: 0;
+    border-radius: 2px;
+}
+
 /* MINER: BLOCKCHAIN CONTAINER */
 .blockchain-container h1 {
     font-size: 1.7vw;

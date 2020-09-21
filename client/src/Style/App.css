@@ -92,6 +92,7 @@ canvas {
 }
 
 .navigation button {
+    cursor: pointer;
     outline: none;
     border: none;
     border-top: 3px solid transparent;
@@ -153,6 +154,7 @@ canvas {
 }
 
 .home-container button {
+    cursor: pointer;
     background-color: transparent;
     padding: .9vh 1.1vw;
     border: 1px white solid;
@@ -249,6 +251,7 @@ canvas {
 }
 
 .transactionpool-mine button {
+    cursor: pointer;
     margin-top: 1vh;
     padding: 1vh 1.1vw;
     color: #1b1b1b;
@@ -332,6 +335,7 @@ canvas {
 }
 
 .blockchain-navigation button {
+    cursor: pointer;
     background-color: transparent;
     font-family: monospace;
     border: none;
@@ -457,6 +461,7 @@ canvas {
 }
 
 .transaction-form button {
+    cursor: pointer;
     margin-right: 4.1vw;
     float: right;
     padding: 1vh 1.1vw;

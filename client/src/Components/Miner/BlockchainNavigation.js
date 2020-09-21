@@ -10,13 +10,15 @@ function BlockchainNavigation({blockchain, currentBlockIndex, setCurrentBlockInd
 
             if (boolean === true) {
                 for (let i=0; i < buttons.length; i++) {
-                    buttons[i].style.color = "#5a5a5a";
                     buttons[i].disabled = false;
+                    buttons[i].style.color = "#5a5a5a";
+                    buttons[i].style.cursor = "pointer";
                 }
             } else {
                 for (let i=0; i < buttons.length; i++) {
-                    buttons[i].style.color = "#242424";
                     buttons[i].disabled = true;
+                    buttons[i].style.color = "#242424";
+                    buttons[i].style.cursor = "auto";
                 }
             }
 

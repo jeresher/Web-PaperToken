@@ -5,14 +5,14 @@ const PubSub = require('./network/pubsub');
 const TransactionPool = require('./cryptocurrency/transactionpool');
 const Wallet = require('./cryptocurrency/wallet');
 const TransactionMiner = require('./cryptocurrency/transactionminer');
-const { PORT, ROOT_NODE_ADDRESS, DEFAULT_PORT } = require('./config/port');
+const { PORT, ROOT_NODE_ADDRESS, DEFAULT_PORT, REDIS_URL } = require('./config/port');
 const { convertDate } = require('./config/util')
 
 const app = express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool;
 const wallet = new Wallet();
-const pubsub = new PubSub( { blockchain, transactionPool });
+const pubsub = new PubSub( { blockchain, transactionPool, redisUrl: REDIS_URL });
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub});
 
 app.use(express.json());

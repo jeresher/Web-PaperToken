@@ -15,12 +15,12 @@ function NavBar() {
           <button>Home</button>
           </ NavLink>
 
-          <NavLink to="/miner" id="miner-tab" className="link" activeClassName="activelink" exact>
-          <button>Miner</button>
-          </ NavLink>
-
           <NavLink to="/user" id="user-tab" className="link" activeClassName="activelink" exact>
           <button>User</button>
+          </ NavLink>
+
+          <NavLink to="/miner" id="miner-tab" className="link" activeClassName="activelink" exact>
+          <button>Miner</button>
           </ NavLink>
 
         </div>

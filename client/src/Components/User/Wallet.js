@@ -7,7 +7,7 @@ function Wallet() {
   function retrieveWalletInfo() {
     fetch("http://localhost:5000/api/wallet-info")
     .then(res => res.json())
-    .then(result => {setWallet(result); console.log(result);})
+    .then(result => setWallet(result))
     .catch(err => console.log(err))
   }
 
@@ -19,14 +19,14 @@ function Wallet() {
       <div className="wallet-info">         
         <div className="wallet-box">
           <h4>Balance</h4>
-          <h6>{wallet ? wallet.balance : null}</h6>
+          <h6>{wallet ? wallet.balance : ""}</h6>
         </div>  
         <div className="wallet-box">
           <h4>Public Key</h4>
           <textarea 
             className="address"
-            value={wallet ? wallet.address : null}
-            locked
+            value={wallet ? wallet.address : ""}
+            readOnly
           ></textarea>
         </div>
       </div>

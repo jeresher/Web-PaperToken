@@ -2,7 +2,6 @@ import React from 'react';
 import Wallet from './User/Wallet';
 import Transaction from './User/Transaction';
 import History from './User/History';
-import test from '../Assets/test.svg'
 
 function User() {
     return (

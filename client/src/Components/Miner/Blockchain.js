@@ -7,6 +7,20 @@ function Blockchain() {
     const [blockchainItems, setBlockchainItems] = useState();
     const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
 
+    function retrieveBlockchain() {
+        fetch("http://localhost:5000/api/blocks")
+        .then(res => res.json())
+        .then(result => {
+            let blockchain = formatBlockchain(result) // blockchain = [[], [{sender, received, amount}], []]
+            setBlockchain(blockchain)
+            setBlockchainItems(blockchain.map(block => block.map(transaction =>
+                    <BlockchainItem transaction={transaction} />
+                )
+            ))
+        })
+        .catch(err => console.log(err))
+    }
+
     function formatBlockchain(chain) {
         let formattedChain = [];
 
@@ -34,22 +48,38 @@ function Blockchain() {
         return formattedChain;
     }
 
-    function retrieveBlockchain() {
-        fetch("http://localhost:5000/api/blocks")
-        .then(res => res.json())
-        .then(result => {
-            let blockchain = formatBlockchain(result) // blockchain = [[], [{sender, received, amount}], []]
-            setBlockchain(blockchain)
-            setBlockchainItems(blockchain.map(block => block.map(transaction =>
-                    <BlockchainItem transaction={transaction} />
-                )
-            ))
-        })
-        .catch(err => console.log(err))
+    function configurePaginationButtons() {
+        let leftButtons = document.getElementsByClassName('left-buttons');
+        let rightButtons = document.getElementsByClassName('right-buttons');
+
+        function enableButtons(boolean, buttons) {
+
+            if (boolean === true) {
+                for (let i=0; i < buttons.length; i++) {
+                    buttons[i].style.color = "#5a5a5a";
+                    buttons[i].disabled = false;
+                }
+            } else {
+                for (let i=0; i < buttons.length; i++) {
+                    buttons[i].style.color = "#242424";
+                    buttons[i].disabled = true;
+                }
+            }
+
+        }
+
+        if (currentBlockIndex === 0) enableButtons(false, leftButtons);
+        else enableButtons(true, leftButtons);
+
+        if (currentBlockIndex === blockchain.length - 1) enableButtons(false, rightButtons);
+        else enableButtons(true, rightButtons);
     }
+
+
 
     useEffect(() => retrieveBlockchain(), [])
     useEffect(() => setCurrentBlockIndex(blockchain.length-1), [blockchain])
+    useEffect(() => configurePaginationButtons(), [currentBlockIndex])
 
     return (
         <div className="blockchain-container">
@@ -67,98 +97,18 @@ function Blockchain() {
                     <tr>
                         {blockchainItems ? blockchainItems[currentBlockIndex] : null}
                     </tr>
-                    {/*
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    <tr>
-                        <td className="blockchain-sender">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-receiver">04f9bb63e1304fcfe7b22d655e3c00f4fd27715b42a59be741a3f98e10963a145d82eb2cd57aff5e0a811c1cfee5c8c8225cb6875c4a799f2a5524329df0b34063</td>
-                        <td className="blockchain-amount">50000</td>
-                    </tr>
-                    */}
                 </tbody>
             </table>
             </div>
             <div className="blockchain-navigation">
 
                 <button
+                    className="left-buttons"
                     onClick={() => setCurrentBlockIndex(0)}
                 >{"<<"}</button>
 
                 <button
+                    className="left-buttons"
                     onClick={(event) => {
                         if (currentBlockIndex <= 0) setCurrentBlockIndex(0);
                         else setCurrentBlockIndex(currentBlockIndex - 1);
@@ -168,6 +118,7 @@ function Blockchain() {
                 <h6>Block {currentBlockIndex}</h6>
 
                 <button
+                    className="right-buttons"
                     onClick={(event) => {
                         if (currentBlockIndex >= blockchain.length-1) setCurrentBlockIndex(blockchain.length-1);
                         else setCurrentBlockIndex(currentBlockIndex + 1);
@@ -175,6 +126,7 @@ function Blockchain() {
                 >{">"}</button>
 
                 <button
+                    className="right-buttons"
                     onClick={() => setCurrentBlockIndex(blockchain.length - 1)}
                 >{">>"}</button>
             </div>

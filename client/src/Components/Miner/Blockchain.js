@@ -9,7 +9,7 @@ function Blockchain() {
     const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
 
     function retrieveBlockchain() {
-        fetch("http://localhost:5000/api/blocks")
+        fetch(`${document.location.origin}/api/blocks`)
         .then(res => res.json())
         .then(result => {
             let blockchain = formatBlockchain(result) 

@@ -7,7 +7,7 @@ function History() {
     const [historyItem, setHistoryItems] = useState([]);
 
     function retrieveTransactions() {
-        fetch("http://localhost:5000/api/wallet-info")
+        fetch(`${document.location.origin}/api/wallet-info`)
         .then(res => res.json())
         .then(result => {
             setHistory(result);

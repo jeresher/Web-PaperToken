@@ -7,7 +7,7 @@ function TransactionPool() {
     const [transactionPoolItems, setTransactionPoolItems] = useState([]);
 
     function retrievePoolTransactions() {
-        fetch("http://localhost:5000/api/transaction-pool-addresses")
+        fetch(`${document.location.origin}/api/transaction-pool-addresses`)
         .then(res => res.json())
         .then(result => {
             setTransactionPool(result)
@@ -19,7 +19,7 @@ function TransactionPool() {
     }
 
     function minePoolTransactions() {
-        fetch("http://localhost:5000/api/mine-transactions")
+        fetch(`${document.location.origin}/api/mine-transactions`)
         .then(res => window.location.reload())
         .catch(err => console.log(err))
     }

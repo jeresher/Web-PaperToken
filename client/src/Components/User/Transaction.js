@@ -7,7 +7,7 @@ function Transaction() {
         const recipient = document.getElementById('recipient');
         const amount = document.getElementById('amount');
 
-        fetch("http://localhost:5000/api/transact", {
+        fetch(`${document.location.origin}/api/transact`, {
             method: "POST",
             body: JSON.stringify({
                 "recipient": recipient.value,

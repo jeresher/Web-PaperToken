@@ -5,7 +5,7 @@ function Wallet() {
   let [wallet, setWallet] = useState(null);
 
   function retrieveWalletInfo() {
-    fetch("http://localhost:5000/api/wallet-info")
+    fetch(`${document.location.origin}/api/wallet-info`)
     .then(res => res.json())
     .then(result => setWallet(result))
     .catch(err => console.log(err))

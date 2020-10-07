@@ -71,6 +71,7 @@ app.post('/api/transact', (req, res) => {
     res.json({ type: 'success', transaction });
 })
 
+// CRYPTOCURRENCY: RETRIEVE THE TRANSACTION POOL. 
 app.get('/api/transaction-pool-map', (req, res) => {
     res.json(transactionPool.transactionMap)
 })
@@ -90,6 +91,7 @@ app.get('/api/transaction-pool-addresses', (req, res) => {
     res.json(addresses)
 })
 
+// CRYPTOCURRENCY: REQUEST TO MINE TRANSACTIONS.
 app.get('/api/mine-transactions', (req, res) => {
     transactionMiner.mineTransactions();
 

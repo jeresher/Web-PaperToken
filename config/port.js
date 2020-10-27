@@ -11,7 +11,7 @@ const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`
 let REDIS_URL;
 
 if (process.env.NODE_ENV === 'production') {
-    REDIS_URL = "redis://h:paccb89227b75571290e81236c1df42b2007aae99f12c199e05eb82a0eb62c097@ec2-35-153-36-76.compute-1.amazonaws.com:29939"
+    REDIS_URL = process.env.REDIS_URL
 } else {
     REDIS_URL = "redis://127.0.0.1:6379"    
 }
